@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"
+      integrity="sha512-pUhApVQtLbnpLtJn6DuzDD5o2xtmLJnJ7oBoMsBnzOkVkpqofGLGPaBJ6ayD2zQe3lCgCibhJBi4cj5wAxwVKA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" class="form">
+      <input type="text" class="input-Link" />
+      <button>Generar</button>
+    </form>
+    <canvas id="qr"></canvas>
+    <script>
+      const link = document.querySelector('.form');
+      const inputLink = document.querySelector('.input-Link');
+
+      link.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log(e.target[0].value);
+        if (e.target[0].value === '') {
+          alert('Ingrese un link');
+          return;
+        }
+        var qr = new QRious({
+          background: 'white',
+          backgroundAlpha: 0.8,
+          foreground: 'black',
+          foregroundAlpha: 0.8,
+          level: 'H',
+          padding: 25,
+          size: 500,
+          element: document.querySelector('canvas'),
+          value: 'https://' + e.target[0].value,
+        });
+        inputLink.value = '';
+      });
+    </script>
+  </body>
+</html>
